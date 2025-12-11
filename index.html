@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Translator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <ion-icon name="globe-outline"></ion-icon>
+            AI-Powered Speech and Document Translator
+        </div>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
+            <ion-icon name="moon-outline" id="themeIcon"></ion-icon>
+        </button>
+    </header>
+
+    <main class="grid-container">
+
+        <!-- SECTION 1 (Left Card) -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Text & Document Translation</h2>
+            </div>
+
+            <!-- Drag-and-upload -->
+            <div class="file-upload-wrapper">
+                <label for="fileInput" class="file-upload-label">
+                    <ion-icon name="cloud-upload-outline"
+                        style="font-size: 2rem; color: var(--primary-start);"></ion-icon>
+                    <span>Click or Drag to upload PDF/Docx</span>
+                </label>
+                <input type="file" id="fileInput" class="hidden" accept=".txt,.pdf,.docx">
+                <div id="fileName"
+                    style="text-align: center; font-size: 0.9rem; color: var(--text-muted); display: none; margin-bottom: 1rem;">
+                </div>
+            </div>
+
+            <!-- Text Input -->
+            <textarea id="inputText" placeholder="Enter text to translate..."></textarea>
+
+            <!-- Controls -->
+            <div class="input-group">
+                <select id="targetLanguage" aria-label="Choose Language"></select>
+                <button id="translateBtn" class="btn btn-primary">
+                    Translate
+                </button>
+            </div>
+        </div>
+
+        <!-- SECTION 2 (Right Card) -->
+        <div class="card">
+            <div class="card-header">
+                <h2 class="card-title">Translation Output</h2>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button id="copyBtn" class="btn btn-ghost" title="Copy">
+                        <ion-icon name="copy-outline"></ion-icon>
+                    </button>
+                    <button id="downloadPdfBtn" class="btn btn-ghost" title="Download PDF">
+                        <ion-icon name="download-outline"></ion-icon>
+                    </button>
+                    <!-- Hidden but kept for logic if needed, or user only wanted 2 buttons? Description said 'Copy' and 'Download' small ghost buttons. -->
+                    <button id="downloadBtn" class="hidden"></button>
+                </div>
+            </div>
+
+            <textarea id="outputText" readonly placeholder="Translated text will appear here..."></textarea>
+
+            <div class="status-bar" id="textStatusBar">
+                <!-- Status will participate here -->
+            </div>
+        </div>
+
+        <!-- SECTION 3 (Bottom Card) -->
+        <div class="card" style="grid-column: 1 / -1;">
+            <div class="card-header">
+                <h2 class="card-title">Live Speech to Text & Translation</h2>
+            </div>
+
+            <div class="speech-container">
+                <div class="speech-left">
+                    <textarea id="speechOutput" readonly placeholder="Real-time speech transcription..."
+                        style="height: 100%; min-height: 150px;"></textarea>
+                </div>
+
+                <div class="speech-right">
+                    <button id="listenBtn" class="btn btn-primary" style="width: 100%;">
+                        <ion-icon name="mic-outline"></ion-icon> Start Listening
+                    </button>
+
+                    <select id="speechTargetLanguage" aria-label="Speech Language"></select>
+
+                    <div class="status-bar" id="speechStatusBar" style="justify-content: center;"></div>
+                    <div id="speechVisualizer" style="height: 4px; border-radius: 2px; width: 100%; margin-top: auto;">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
